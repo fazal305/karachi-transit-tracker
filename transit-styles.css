@@ -1,0 +1,492 @@
+/* 
+   BASE
+*/
+
+:root {
+    --bg-dark: #060610;
+    --surface-dark: #0e0e1a;
+    --surface-soft: #141427;
+    --border-dark: #1a1a2e;
+    --text-main: #ffffff;
+    --text-muted: #a7a7bd;
+    --green-line: #00c853;
+    --orange-line: #ff6d00;
+    --cyan-glow: #00f5ff;
+    --warning: #ffb000;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, rgba(0, 245, 255, 0.12), transparent 28rem),
+        radial-gradient(circle at bottom right, rgba(255, 109, 0, 0.1), transparent 28rem),
+        var(--bg-dark);
+    color: var(--text-main);
+    font-family: "Inter", sans-serif;
+}
+
+button,
+select {
+    font: inherit;
+}
+
+/* 
+   LAYOUT
+*/
+
+.app-shell {
+    width: min(1180px, calc(100% - 24px));
+    margin: 0 auto;
+    padding: 32px 0;
+}
+
+.hero-section {
+    margin-bottom: 24px;
+}
+
+.eyebrow-text {
+    margin: 0 0 10px;
+    color: var(--cyan-glow);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+}
+
+.hero-section h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 7vw, 5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+}
+
+.hero-description {
+    max-width: 780px;
+    margin: 18px 0 0;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.dashboard-card {
+    border: 1px solid var(--border-dark);
+    border-radius: 24px;
+    background: rgba(14, 14, 26, 0.92);
+    box-shadow: 0 0 40px rgba(0, 245, 255, 0.08);
+    overflow: hidden;
+}
+
+/* 
+   TABS
+*/
+
+.transit-tabs {
+    border-bottom: 1px solid var(--border-dark);
+    background: #090914;
+    padding: 12px 12px 0;
+}
+
+.transit-tabs .nav-link {
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.transit-tabs .nav-link:hover {
+    color: var(--cyan-glow);
+    border-color: rgba(0, 245, 255, 0.35);
+}
+
+.transit-tabs .nav-link.active {
+    color: var(--text-main);
+    background: var(--surface-dark);
+    border-color: var(--border-dark);
+    border-bottom-color: var(--surface-dark);
+    box-shadow: 0 -4px 18px rgba(0, 245, 255, 0.1);
+}
+
+.tab-panel {
+    display: none;
+    padding: 20px;
+}
+
+.active-panel {
+    display: block;
+}
+
+/* 
+   MAP
+*/
+
+.map-header,
+.section-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.map-header h2,
+.section-heading h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.map-header p,
+.section-heading p {
+    margin: 6px 0 0;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.simulated-badge {
+    background: rgba(255, 176, 0, 0.14);
+    color: var(--warning);
+    border: 1px solid rgba(255, 176, 0, 0.45);
+    font-family: "JetBrains Mono", monospace;
+}
+
+.layer-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.layer-btn {
+    color: var(--text-muted);
+    border: 1px solid var(--border-dark);
+    background: var(--surface-soft);
+}
+
+.layer-btn:hover,
+.layer-btn.active {
+    color: var(--bg-dark);
+    background: var(--cyan-glow);
+    border-color: var(--cyan-glow);
+}
+
+.map-frame {
+    position: relative;
+    min-height: 520px;
+    border: 1px solid rgba(0, 245, 255, 0.35);
+    border-radius: 20px;
+    overflow: hidden;
+    background: #05050c;
+    box-shadow: inset 0 0 28px rgba(0, 245, 255, 0.12);
+}
+
+#karachi-map {
+    width: 100%;
+    height: 520px;
+}
+
+.weather-widget {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    z-index: 500;
+    max-width: 280px;
+    padding: 14px;
+    border: 1px solid rgba(0, 245, 255, 0.25);
+    border-radius: 16px;
+    background: rgba(6, 6, 16, 0.9);
+    color: var(--text-main);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 22px rgba(0, 245, 255, 0.16);
+}
+
+.rain-alert {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 176, 0, 0.45);
+    border-radius: 14px;
+    background: rgba(255, 176, 0, 0.12);
+    color: var(--warning);
+    font-weight: 700;
+}
+
+/* 
+   FORMS
+*/
+
+.form-label {
+    color: var(--text-muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.form-select {
+    color: var(--text-main);
+    border: 1px solid var(--border-dark);
+    background-color: var(--surface-soft);
+}
+
+.form-select:focus {
+    color: var(--text-main);
+    border-color: var(--cyan-glow);
+    background-color: var(--surface-soft);
+    box-shadow: 0 0 0 0.2rem rgba(0, 245, 255, 0.14);
+}
+
+.primary-action {
+    color: var(--bg-dark);
+    border: 1px solid var(--cyan-glow);
+    background: var(--cyan-glow);
+    font-weight: 800;
+}
+
+.primary-action:hover {
+    color: var(--bg-dark);
+    background: #7cffff;
+}
+
+.secondary-action {
+    color: var(--cyan-glow);
+    border: 1px solid rgba(0, 245, 255, 0.4);
+    background: transparent;
+    font-weight: 700;
+}
+
+.secondary-action:hover {
+    color: var(--bg-dark);
+    background: var(--cyan-glow);
+}
+
+.planner-actions {
+    margin-top: 16px;
+}
+
+/* 
+   RESULTS
+*/
+
+.route-result,
+.service-status,
+.next-departures,
+.countdown-box,
+.schedule-table-wrapper {
+    margin-top: 18px;
+    padding: 16px;
+    border: 1px solid var(--border-dark);
+    border-radius: 18px;
+    background: rgba(20, 20, 39, 0.72);
+    color: var(--text-muted);
+}
+
+.route-result strong,
+.next-departures strong,
+.countdown-box strong {
+    color: var(--text-main);
+}
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text-main);
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.04);
+    --bs-table-striped-color: var(--text-main);
+    border-color: var(--border-dark);
+}
+
+.table th {
+    color: var(--cyan-glow);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+}
+
+.status-active {
+    color: var(--green-line);
+    font-weight: 800;
+}
+
+.status-closed {
+    color: #ff4d6d;
+    font-weight: 800;
+}
+
+/* 
+   LEAFLET POPUP
+*/
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+    background: #0e0e1a;
+    color: #ffffff;
+}
+
+.leaflet-popup-content {
+    margin: 12px;
+}
+
+.popup-title {
+    margin: 0 0 6px;
+    font-weight: 800;
+}
+
+.popup-meta {
+    margin: 4px 0;
+    color: #c9c9d8;
+    font-size: 0.9rem;
+}
+
+/* 
+   MOBILE
+*/
+
+@media (max-width: 768px) {
+    .app-shell {
+        width: min(100% - 16px, 1180px);
+        padding: 18px 0;
+    }
+
+    .dashboard-card {
+        border-radius: 18px;
+    }
+
+    .tab-panel {
+        padding: 14px;
+    }
+
+    .map-header,
+    .section-heading {
+        flex-direction: column;
+    }
+
+    .map-frame,
+    #karachi-map {
+        min-height: 420px;
+        height: 420px;
+    }
+
+    .weather-widget {
+        right: 12px;
+        left: 12px;
+        bottom: 12px;
+        max-width: none;
+    }
+
+    .transit-tabs {
+        gap: 6px;
+    }
+
+    .transit-tabs .nav-link {
+        padding: 10px;
+        font-size: 0.72rem;
+    }
+}
+/* 
+   BUS ICONS
+*/
+
+.bus-icon-wrapper {
+    background: transparent;
+    border: none;
+}
+
+.bus-icon {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 7px;
+    border: 2px solid;
+    border-radius: 999px;
+    background: rgba(6, 6, 16, 0.92);
+    color: #ffffff;
+    font-size: 1rem;
+    box-shadow: 0 0 18px rgba(0, 245, 255, 0.28);
+}
+
+.bus-icon span {
+    color: #ffb000;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.62rem;
+    font-weight: 800;
+}
+/* 
+   ROUTE CARD
+*/
+
+.route-card {
+    color: var(--text-main);
+    border: 1px solid var(--border-dark);
+    background: rgba(6, 6, 16, 0.82);
+}
+
+.route-card h3 {
+    margin-bottom: 14px;
+    font-weight: 800;
+}
+
+.route-card p {
+    margin: 8px 0;
+    color: var(--text-muted);
+}
+
+.route-card strong {
+    color: var(--text-main);
+}
+/* 
+   TIMETABLE
+*/
+
+.departure-list {
+    margin: 10px 0 0;
+    padding-left: 20px;
+}
+
+.departure-list li {
+    margin-bottom: 8px;
+}
+
+.countdown-box {
+    color: var(--cyan-glow);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.05rem;
+}
+
+@media print {
+    body {
+        background: #ffffff;
+        color: #000000;
+    }
+
+    .hero-section,
+    .transit-tabs,
+    .map-panel,
+    .planner-panel,
+    .layer-controls,
+    .primary-action,
+    .secondary-action {
+        display: none;
+    }
+
+    .dashboard-card,
+    .tab-panel,
+    .schedule-table-wrapper {
+        border: none;
+        box-shadow: none;
+        background: #ffffff;
+        color: #000000;
+    }
+
+    .table {
+        --bs-table-color: #000000;
+    }
+}
