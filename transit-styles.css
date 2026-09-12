@@ -226,6 +226,17 @@ select:focus-visible {
   display: none;
 }
 
+.offline-banner {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 10px 16px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--bg-dark);
+  background: var(--danger);
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;

@@ -27,6 +27,7 @@ const weatherWidget = document.getElementById("weather-widget");
 const rainAlert = document.getElementById("rain-alert");
 
 document.addEventListener("DOMContentLoaded", function () {
+    setupOfflineBanner();
     setupTabs();
     populateDropdowns();
     initMap();
@@ -37,6 +38,24 @@ document.addEventListener("DOMContentLoaded", function () {
     setupTimetable();
     startBusSimulation();
 });
+
+const SLOW_REQUEST_THRESHOLD_MS = 5000;
+
+function setupOfflineBanner() {
+    const banner = document.createElement("div");
+    banner.id = "offline-banner";
+    banner.className = "offline-banner hidden";
+    banner.textContent = "You're offline — live data won't update.";
+    document.body.insertBefore(banner, document.body.firstChild);
+
+    function updateOnlineStatus() {
+        banner.classList.toggle("hidden", navigator.onLine);
+    }
+
+    window.addEventListener("online", updateOnlineStatus);
+    window.addEventListener("offline", updateOnlineStatus);
+    updateOnlineStatus();
+}
 
 function setupTabs() {
     document.querySelectorAll(".tab-btn").forEach(function (button) {
@@ -152,6 +171,10 @@ function renderStationPopup(station, line) {
 async function fetchWeather() {
     const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${KARACHI_CENTER.lat}&longitude=${KARACHI_CENTER.lng}&current=temperature_2m,precipitation,wind_speed_10m`;
 
+    const slowTimer = window.setTimeout(function () {
+        weatherWidget.innerHTML = "Still fetching weather data...";
+    }, SLOW_REQUEST_THRESHOLD_MS);
+
     try {
         const response = await fetch(weatherUrl);
 
@@ -167,6 +190,8 @@ async function fetchWeather() {
       <strong>Weather unavailable</strong><br>
       Could not fetch live weather right now.
     `;
+    } finally {
+        window.clearTimeout(slowTimer);
     }
 }
 
