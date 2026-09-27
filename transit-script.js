@@ -1,3 +1,9 @@
+function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (ch) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[ch]));
+}
+
 const appState = {
     map: null,
     layers: {
@@ -251,9 +257,9 @@ function addLandmarkMarker(place) {
     const type = place.tags.amenity || place.tags.tourism || place.tags.railway || "landmark";
 
     marker.bindPopup(`
-    <h3 class="popup-title" style="color: #00f5ff;">${place.tags.name}</h3>
+    <h3 class="popup-title" style="color: #00f5ff;">${escapeHtml(place.tags.name)}</h3>
     <p class="popup-meta"><strong>Source:</strong> OpenStreetMap</p>
-    <p class="popup-meta"><strong>Type:</strong> ${type}</p>
+    <p class="popup-meta"><strong>Type:</strong> ${escapeHtml(type)}</p>
   `);
 
     marker.addTo(appState.layers.landmarks);
