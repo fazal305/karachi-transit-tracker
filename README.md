@@ -76,7 +76,7 @@ An internet connection is required for map tiles, Leaflet, weather data, and opt
 Built by Fazal Abbas.
 
 - GitHub: https://github.com/fazal305
-- LinkedIn: https://www.linkedin.com/in/fazal-abbas-4653dg86
+- LinkedIn: https://www.linkedin.com/in/fazal-abbas879/
 
 ## License
 
